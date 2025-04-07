@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idv CDN Samle</title>
+
+    <script src="https://unpkg.com/@regulaforensics/idv-capture-web@0.1.115-nightly/dist/main.iife.js"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      idv-flow::part(idv) {
+        border: 1px dashed black;
+      }
+    </style>
+  </head>
+  <body>
+    <idv-flow></idv-flow>
+
+    <script>
+      const idvSdk = window.Regula;
+      const IdvModules = idvSdk.IdvModules;
+      const service = new idvSdk.IdvIntegrationService();
+      const idvEventListener = (event) => {
+        console.log(event);
+      };
+      service.sessionRestoreMode = true;
+      service.eventListener = idvEventListener;
+
+      (async function () {
+        const initResilt = await service.initialize({
+          includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+        });
+        if (initResilt.error) {
+          console.log(initResilt.error);
+          return;
+        }
+
+        const configureResult = await service.configure({
+          host: "", // set host
+          userName: "", // set user name
+          password: "", // set password
+        });
+        console.log(configureResult);
+        if (configureResult.error) {
+          console.log(configureResult.error);
+          return;
+        }
+        const prepareResult = await service.prepareWorkflow({
+          workflowId: "", // set workflow
+        });
+        if (prepareResult.error) {
+          console.log(prepareResult.error);
+          return;
+        }
+        const metadata = { fromCodePenSamle: true };
+        const startWorkflowResult = await service?.startWorkflow(metadata);
+        if (startWorkflowResult.error) {
+          console.log(startWorkflowResult.error);
+          return;
+        }
+        console.log("WORKFLOW FINISHED :", startWorkflowResult);
+      })();
+    </script>
+  </body>
+</html>

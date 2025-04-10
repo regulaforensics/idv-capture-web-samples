@@ -13,7 +13,7 @@ env:
   # List of paths (space separated) to ignore
   # Supports PATTERNS
   # EXCLUDE_PATHS: 'foo bar/baz file.txt dir/*.yml'
-  EXCLUDE_PATHS: "cdn/*.html"
+  EXCLUDE_PATHS: "cdn/**/*.html"
   # skip html cdn samples with latest script version
   # List of rules (space separated) to ignore
   # EXCLUDE_RULES: 'generic.secrets.security.detected-aws-account-id.detected-aws-account-id'

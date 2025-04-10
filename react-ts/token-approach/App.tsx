@@ -1,31 +1,40 @@
 import { useEffect, useRef } from "react";
-import { IdvIntegrationService, IdvMessageEvent, IdvModules } from "@regulaforensics/idv-capture-web";
+import {
+  IdvIntegrationService,
+  IdvMessageEvent,
+  IdvModules,
+} from "@regulaforensics/idv-capture-web";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
+  const searchParams = new URLSearchParams(window.location.search);
+  /** get token from the URL */
+  /** for example, we get the search parameter "workflow" */
+  /** This is one of the ways to transfer the token to the application page. */
+  /** You can also transfer the token to the app using props. */
+  const workflowToken = searchParams.get("workflow");
 
   const listener = (event: IdvMessageEvent) => {
     console.log(event);
-  }
+  };
 
   useEffect(() => {
+    if (!workflowToken) {
+      console.log('The workflow token was not found');
+      return;
+    }
     service.current = new IdvIntegrationService();
     service.current.sessionRestoreMode = true;
     service.current.eventListener = listener;
     const serviceRun = async () => {
-      const initResilt = await service.current?.initialize({
+      const initResult = await service.current?.initialize({
         includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
       });
-      if (initResilt?.error) {
-        console.log(initResilt.error);
+      if (initResult?.error) {
+        console.log(initResult.error);
         return;
       }
-  
-      const configureResult = await service.current?.configure({
-        host: "", // set host
-        userName: "", // set user name
-        password: "",  // set password
-      });
+      const configureResult = await service.current?.configure(workflowToken);
       console.log(configureResult);
       if (configureResult?.error) {
         console.log(configureResult.error);
@@ -39,18 +48,20 @@ function App() {
         return;
       }
       const metadata = { fromCodePenSamle: true };
-      const startWorkflowResult = await service.current?.startWorkflow(metadata);
+      const startWorkflowResult = await service.current?.startWorkflow(
+        metadata
+      );
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);
         return;
       }
       console.log("WORKFLOW FINISHED :", startWorkflowResult);
-    }
+    };
     serviceRun();
   }, []);
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <idv-flow></idv-flow>
     </div>
   );

@@ -10,11 +10,11 @@ service.sessionRestoreMode = true;
 service.eventListener = idvEventListener;
 
 (async function () {
-    const initResilt = await service.initialize({
+    const initResult = await service.initialize({
       includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
     });
-    if (initResilt.error) {
-      console.log(initResilt.error);
+    if (initResult.error) {
+      console.log(initResult.error);
       return;
     }
 

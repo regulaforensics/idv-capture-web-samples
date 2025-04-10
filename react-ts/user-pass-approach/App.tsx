@@ -13,11 +13,11 @@ function App() {
     service.current.sessionRestoreMode = true;
     service.current.eventListener = listener;
     const serviceRun = async () => {
-      const initResilt = await service.current?.initialize({
+      const initResult = await service.current?.initialize({
         includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
       });
-      if (initResilt?.error) {
-        console.log(initResilt.error);
+      if (initResult?.error) {
+        console.log(initResult.error);
         return;
       }
   

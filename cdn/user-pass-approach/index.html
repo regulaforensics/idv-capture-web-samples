@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My app</title>
+
+    <style>
+      html,
+      body,
+      #container {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <idv-flow></idv-flow>
+    </div>
+    <script src="https://unpkg.com/@regulaforensics/idv-capture-web@latest/dist/main.iife.js"></script>
+    <script>
+      function idvEventListener(data) {
+        console.log(data);
+      }
+
+      const idvSkd = window.RegulaIdv;
+      const { IdvIntegrationService } = idvSkd;
+
+      const service = new IdvIntegrationService();
+      service.sessionRestoreMode = true;
+      service.eventListener = idvEventListener;
+
+      (async function () {
+        const initResilt = await service.initialize({
+          includedModules: ['LIVENESS', 'DOC_READER'],
+        });
+        if (initResilt.error) {
+          console.log(initResilt.error);
+          return;
+        }
+
+        const configureResult = await service.configure({
+          host: "", // set host
+          userName: "", // set user name
+          password: "", // set password
+        });
+        console.log(configureResult);
+        if (configureResult.error) {
+          console.log(configureResult.error);
+          return;
+        }
+        const prepareResult = await service.prepareWorkflow({
+          workflowId: "", // set workflow id
+        });
+        if (prepareResult.error) {
+          console.log(prepareResult.error);
+          return;
+        }
+        const metadata = { fromCodePenSamle: true };
+        const startWorkflowResult = await service?.startWorkflow(metadata);
+        if (startWorkflowResult.error) {
+          console.log(startWorkflowResult.error);
+          return;
+        }
+        console.log("WORKFLOW FINISHED :", startWorkflowResult);
+      })();
+    </script>
+  </body>
+</html>

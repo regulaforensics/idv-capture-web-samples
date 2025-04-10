@@ -1,0 +1,70 @@
+import { useEffect, useRef } from "react";
+import {
+  IdvIntegrationService,
+  IdvMessageEvent,
+  IdvModules,
+} from "@regulaforensics/idv-capture-web";
+
+function App() {
+  const service = useRef<IdvIntegrationService | null>(null);
+  const searchParams = new URLSearchParams(window.location.search);
+  /** get token from the URL */
+  /** for example, we get the search parameter "workflow" */
+  /** This is one of the ways to transfer the token to the application page. */
+  /** You can also transfer the token to the app using props. */
+  const workflowToken = searchParams.get("workflow");
+
+  const listener = (event: IdvMessageEvent) => {
+    console.log(event);
+  };
+
+  useEffect(() => {
+    if (!workflowToken) {
+      console.log('The workflow token was not found');
+      return;
+    }
+    service.current = new IdvIntegrationService();
+    service.current.sessionRestoreMode = true;
+    service.current.eventListener = listener;
+    const serviceRun = async () => {
+      const initResilt = await service.current?.initialize({
+        includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+      });
+      if (initResilt?.error) {
+        console.log(initResilt.error);
+        return;
+      }
+      const configureResult = await service.current?.configure(workflowToken);
+      console.log(configureResult);
+      if (configureResult?.error) {
+        console.log(configureResult.error);
+        return;
+      }
+      const prepareResult = await service.current?.prepareWorkflow({
+        workflowId: "", // set workflow id
+      });
+      if (prepareResult?.error) {
+        console.log(prepareResult.error);
+        return;
+      }
+      const metadata = { fromCodePenSamle: true };
+      const startWorkflowResult = await service.current?.startWorkflow(
+        metadata
+      );
+      if (startWorkflowResult?.error) {
+        console.log(startWorkflowResult.error);
+        return;
+      }
+      console.log("WORKFLOW FINISHED :", startWorkflowResult);
+    };
+    serviceRun();
+  }, []);
+
+  return (
+    <div style={{ height: "100%", width: "100%" }}>
+      <idv-flow></idv-flow>
+    </div>
+  );
+}
+
+export default App;

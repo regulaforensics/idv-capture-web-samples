@@ -39,7 +39,12 @@
 
       (async function () {
         const initResult = await service.initialize({
-          includedModules: ['LIVENESS', 'DOC_READER'],
+          modulesConfig: {
+            docreader: {
+              devLicense: "Base64License",
+            },
+          },
+          includedModules: ["LIVENESS", "DOC_READER"],
         });
         if (initResult.error) {
           console.log(initResult.error);
@@ -63,7 +68,7 @@
           console.log(prepareResult.error);
           return;
         }
-        const metadata = { fromCodePenSamle: true };
+        const metadata = { test: true };
         const startWorkflowResult = await service?.startWorkflow(metadata);
         if (startWorkflowResult.error) {
           console.log(startWorkflowResult.error);

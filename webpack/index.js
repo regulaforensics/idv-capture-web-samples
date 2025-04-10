@@ -11,6 +11,11 @@ service.eventListener = idvEventListener;
 
 (async function () {
     const initResult = await service.initialize({
+      modulesConfig: {
+        docreader: {
+          devLicense: 'Base64License',
+        }
+      },
       includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
     });
     if (initResult.error) {
@@ -35,7 +40,7 @@ service.eventListener = idvEventListener;
       console.log(prepareResult.error);
       return;
     }
-    const metadata = { fromCodePenSamle: true };
+    const metadata = { test: true };
     const startWorkflowResult = await service?.startWorkflow(metadata);
     if (startWorkflowResult.error) {
       console.log(startWorkflowResult.error);

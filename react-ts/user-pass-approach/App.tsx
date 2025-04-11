@@ -14,6 +14,11 @@ function App() {
     service.current.eventListener = listener;
     const serviceRun = async () => {
       const initResult = await service.current?.initialize({
+        modulesConfig: {
+          docreader: {
+            devLicense: 'Base64License',
+          }
+        },
         includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
       });
       if (initResult?.error) {
@@ -38,7 +43,7 @@ function App() {
         console.log(prepareResult.error);
         return;
       }
-      const metadata = { fromCodePenSamle: true };
+      const metadata = { test: true };
       const startWorkflowResult = await service.current?.startWorkflow(metadata);
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);

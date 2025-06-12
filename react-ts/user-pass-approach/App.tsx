@@ -44,7 +44,10 @@ function App() {
         return;
       }
       const metadata = { test: true };
-      const startWorkflowResult = await service.current?.startWorkflow(metadata);
+      const startWorkflowResult = await service.current?.startWorkflow({
+        metadata: metadata,
+        locale: 'en'
+      });
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);
         return;

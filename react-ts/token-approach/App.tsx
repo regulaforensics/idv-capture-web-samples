@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     if (!workflowToken) {
-      console.log('The workflow token was not found');
+      console.log("The workflow token was not found");
       return;
     }
     service.current = new IdvIntegrationService();
@@ -30,8 +30,8 @@ function App() {
       const initResult = await service.current?.initialize({
         modulesConfig: {
           docreader: {
-            devLicense: 'Base64License',
-          }
+            devLicense: "Base64License",
+          },
         },
         includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
       });
@@ -53,9 +53,10 @@ function App() {
         return;
       }
       const metadata = { test: true };
-      const startWorkflowResult = await service.current?.startWorkflow(
-        metadata
-      );
+      const startWorkflowResult = await service.current?.startWorkflow({
+        metadata: metadata,
+        locale: "en",
+      });
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);
         return;

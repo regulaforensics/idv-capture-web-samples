@@ -41,7 +41,10 @@ service.eventListener = idvEventListener;
       return;
     }
     const metadata = { test: true };
-    const startWorkflowResult = await service?.startWorkflow(metadata);
+    const startWorkflowResult = await service?.startWorkflow({
+      metadata: metadata,
+      locale: 'en',
+    });
     if (startWorkflowResult.error) {
       console.log(startWorkflowResult.error);
       return;

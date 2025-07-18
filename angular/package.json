@@ -21,7 +21,6 @@
     "@regulaforensics/idv-capture-web": "2.5.185-nightly",
     "@regulaforensics/idv-face": "2.5.185-nightly",
     "@regulaforensics/idv-document": "2.5.185-nightly",
-    "@regulaforensics/idv-gui": "2.5.185-nightly",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

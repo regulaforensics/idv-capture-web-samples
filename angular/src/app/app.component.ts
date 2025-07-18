@@ -4,7 +4,6 @@ import { IdvComponent } from "./components/idv.component";
 import { IdvIntegrationService } from "@regulaforensics/idv-capture-web";
 import { FaceIdv } from "@regulaforensics/idv-face";
 import { DocumentIdv } from "@regulaforensics/idv-document";
-import { GuiIdv } from "@regulaforensics/idv-gui";
 
 @Component({
   selector: "app-root",
@@ -59,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
             "your dev base64 license",
         },
       },
-      includedModules: [FaceIdv, DocumentIdv, GuiIdv],
+      includedModules: [FaceIdv, DocumentIdv],
     });
     if (initResult.error) {
       console.log(initResult.error);

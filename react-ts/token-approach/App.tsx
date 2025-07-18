@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import {
   IdvIntegrationService,
   IdvMessageEvent,
-  IdvModules,
 } from "@regulaforensics/idv-capture-web";
+import { DocumentIdv } from "@regulaforensics/idv-document";
+import { FaceIdv } from "@regulaforensics/idv-face";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
@@ -13,7 +14,6 @@ function App() {
   /** This is one of the ways to transfer the token to the application page. */
   /** You can also transfer the token to the app using props. */
   const workflowToken = searchParams.get("workflow");
-
   const listener = (event: IdvMessageEvent) => {
     console.log(event);
   };
@@ -33,13 +33,15 @@ function App() {
             devLicense: "Base64License",
           },
         },
-        includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+        includedModules: [FaceIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);
         return;
       }
-      const configureResult = await service.current?.configure(workflowToken);
+      const configureResult = await service.current?.configure({
+        url: workflowToken,
+      });
       console.log(configureResult);
       if (configureResult?.error) {
         console.log(configureResult.error);

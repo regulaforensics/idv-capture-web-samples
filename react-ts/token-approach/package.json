@@ -7,7 +7,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@regulaforensics/idv-capture-web": "latest",
+    "@regulaforensics/idv-capture-web": "nightly",
+    "@regulaforensics/idv-face": "nightly",
+    "@regulaforensics/idv-document": "nightly",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

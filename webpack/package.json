@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@regulaforensics/idv-capture-web": "latest"
+    "@regulaforensics/idv-capture-web": "2.5.185-nightly",
+    "@regulaforensics/idv-face": "2.5.185-nightly",
+    "@regulaforensics/idv-document": "2.5.185-nightly"
   },
   "devDependencies": {
     "babel-loader": "^9.2.1",

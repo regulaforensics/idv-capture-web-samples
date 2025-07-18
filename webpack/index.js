@@ -1,5 +1,6 @@
-import { IdvIntegrationService, IdvModules } from '@regulaforensics/idv-capture-web';
-
+import { IdvIntegrationService } from '@regulaforensics/idv-capture-web';
+import { FaceIdv } from '@regulaforensics/idv-face';
+import { DocumentIdv } from '@regulaforensics/idv-document';
 
 function idvEventListener(data) {
     console.log(data);
@@ -8,15 +9,16 @@ function idvEventListener(data) {
 const service = new IdvIntegrationService();
 service.sessionRestoreMode = true;
 service.eventListener = idvEventListener;
+console.log(service.version);
 
 (async function () {
     const initResult = await service.initialize({
       modulesConfig: {
         docreader: {
-          devLicense: 'Base64License',
+          devLicense: 'your base64 license',
         }
       },
-      includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+      includedModules: [FaceIdv, DocumentIdv],
     });
     if (initResult.error) {
       console.log(initResult.error);
@@ -26,16 +28,17 @@ service.eventListener = idvEventListener;
     const configureResult = await service.configure({
       host: "", // set host
       userName: "", // set user name
-      password: "", // set password
+      password: "",  // set password
     });
-    console.log(configureResult);
-    if (configureResult.error) {
+    console.log({configureResult});
+    if (configureResult?.error) {
       console.log(configureResult.error);
       return;
     }
     const prepareResult = await service.prepareWorkflow({
       workflowId: "", // set workflow id
     });
+    console.log({prepareResult});
     if (prepareResult.error) {
       console.log(prepareResult.error);
       return;

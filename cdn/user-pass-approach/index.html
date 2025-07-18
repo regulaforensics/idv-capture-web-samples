@@ -24,16 +24,24 @@
     <div id="container">
       <idv-flow></idv-flow>
     </div>
-    <script src="https://unpkg.com/@regulaforensics/idv-capture-web@latest/dist/main.iife.js"></script>
+    <script src="https://unpkg.com/@regulaforensics/idv-capture-web@nightly/dist/main.iife.js"></script>
+    <script src="https://unpkg.com/@regulaforensics/idv-face@nightly/dist/main.iife.js"></script>
+    <script src="https://unpkg.com/@regulaforensics/idv-document@nightly/dist/main.iife.js"></script>
     <script>
       function idvEventListener(data) {
         console.log(data);
       }
 
       const idvSdk = window.RegulaIdv;
+      const faceModule = window.RegulaIdvFace;
+      const docreaderModule = window.RegulaIdvDocument;
+
       const { IdvIntegrationService } = idvSdk;
+      const { FaceIdv } = faceModule;
+      const { DocreaderIdv } = docreaderModule;
 
       const service = new IdvIntegrationService();
+      console.log(service.version);
       service.sessionRestoreMode = true;
       service.eventListener = idvEventListener;
 
@@ -44,7 +52,7 @@
               devLicense: "Base64License",
             },
           },
-          includedModules: ["LIVENESS", "DOC_READER"],
+          includedModules: [FaceIdv, DocreaderIdv],
         });
         if (initResult.error) {
           console.log(initResult.error);

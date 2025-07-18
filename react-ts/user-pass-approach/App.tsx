@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
-import { IdvIntegrationService, IdvMessageEvent, IdvModules } from "@regulaforensics/idv-capture-web";
+import { IdvIntegrationService, IdvMessageEvent } from "@regulaforensics/idv-capture-web";
+import { FaceIdv } from '@regulaforensics/idv-face';
+import { DocumentIdv } from '@regulaforensics/idv-document';
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
@@ -16,10 +18,10 @@ function App() {
       const initResult = await service.current?.initialize({
         modulesConfig: {
           docreader: {
-            devLicense: 'Base64License',
+            devLicense: "your dev base64 license"
           }
         },
-        includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+        includedModules: [FaceIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);
@@ -50,6 +52,7 @@ function App() {
       });
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);
+        service.current?.deinitialize();
         return;
       }
       console.log("WORKFLOW FINISHED :", startWorkflowResult);

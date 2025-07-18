@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "serve": "vite",
+    "serve": "vite --port 3000",
     "build": "vite build"
   },
   "dependencies": {
-    "@regulaforensics/idv-capture-web": "latest",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@regulaforensics/idv-capture-web": "2.5.185-nightly",
+    "@regulaforensics/idv-face": "2.5.185-nightly",
+    "@regulaforensics/idv-document": "2.5.185-nightly",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.0.12",

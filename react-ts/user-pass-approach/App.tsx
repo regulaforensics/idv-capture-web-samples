@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
-import { IdvIntegrationService, IdvMessageEvent, IdvModules } from "@regulaforensics/idv-capture-web";
+import { IdvIntegrationService, IdvMessageEvent } from "@regulaforensics/idv-capture-web";
+import { FaceIdv } from "@regulaforensics/idv-face";
+import { DocumentIdv } from "@regulaforensics/idv-document";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
@@ -19,7 +21,7 @@ function App() {
             devLicense: 'Base64License',
           }
         },
-        includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+        includedModules: [FaceIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);
@@ -27,7 +29,7 @@ function App() {
       }
   
       const configureResult = await service.current?.configure({
-        host: "", // set host
+        baseUrl: "", // set host
         userName: "", // set user name
         password: "",  // set password
       });

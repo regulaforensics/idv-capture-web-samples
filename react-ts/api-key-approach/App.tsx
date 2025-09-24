@@ -30,8 +30,8 @@ function App() {
   
       const configureResult = await service.current?.configure({
         baseUrl: "", // set host
-        userName: "", // set user name
-        password: "",  // set password
+        apiKey: "", // set api key
+        ttl: 86400,  // set time to live
       });
       console.log(configureResult);
       if (configureResult?.error) {

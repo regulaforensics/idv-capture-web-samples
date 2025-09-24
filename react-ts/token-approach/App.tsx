@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import {
   IdvIntegrationService,
   IdvMessageEvent,
-  IdvModules,
 } from "@regulaforensics/idv-capture-web";
+import { FaceIdv } from "@regulaforensics/idv-face";
+import { DocumentIdv } from "@regulaforensics/idv-document";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
@@ -33,13 +34,15 @@ function App() {
             devLicense: "Base64License",
           },
         },
-        includedModules: [IdvModules.LIVENESS, IdvModules.DOC_READER],
+        includedModules: [FaceIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);
         return;
       }
-      const configureResult = await service.current?.configure(workflowToken);
+      const configureResult = await service.current?.configure({
+        url: workflowToken
+      });
       console.log(configureResult);
       if (configureResult?.error) {
         console.log(configureResult.error);

@@ -1,0 +1,9 @@
+<div class="container">
+    <app-idv *ngIf="isOpen && isPreparedWithId; else openButton"></app-idv>
+    <!-- <div *ngIf="!isOpen" class="processing-message">
+        Workflow is processing, please wait...
+    </div> -->
+    <ng-template #openButton>
+        <button [disabled]="!isConnectedToPlatform" (click)="startWorkflow()">Start Session</button>
+    </ng-template>
+</div>

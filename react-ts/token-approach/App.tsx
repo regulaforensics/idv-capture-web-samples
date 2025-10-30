@@ -3,8 +3,8 @@ import {
   IdvIntegrationService,
   IdvMessageEvent,
 } from "@regulaforensics/idv-capture-web";
-import { FaceIdv } from "@regulaforensics/idv-face";
 import { DocumentIdv } from "@regulaforensics/idv-document";
+import { IproovIdv } from "@regulaforensics/idv-iproov";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
@@ -34,7 +34,7 @@ function App() {
             devLicense: "Base64License",
           },
         },
-        includedModules: [FaceIdv, DocumentIdv],
+        includedModules: [IproovIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);

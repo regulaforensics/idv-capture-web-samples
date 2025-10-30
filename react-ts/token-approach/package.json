@@ -9,7 +9,7 @@
   "dependencies": {
     "@regulaforensics/idv-capture-web": "latest",
     "@regulaforensics/idv-document": "latest",
-    "@regulaforensics/idv-face": "latest",
+    "@regulaforensics/idv-iproov": "0.0.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

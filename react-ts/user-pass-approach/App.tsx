@@ -1,14 +1,17 @@
 import { useEffect, useRef } from "react";
-import { IdvIntegrationService, IdvMessageEvent } from "@regulaforensics/idv-capture-web";
-import { FaceIdv } from "@regulaforensics/idv-face";
+import {
+  IdvIntegrationService,
+  IdvMessageEvent,
+} from "@regulaforensics/idv-capture-web";
 import { DocumentIdv } from "@regulaforensics/idv-document";
+import { IproovIdv } from "@regulaforensics/idv-iproov";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
 
   const listener = (event: IdvMessageEvent) => {
     console.log(event);
-  }
+  };
 
   useEffect(() => {
     service.current = new IdvIntegrationService();
@@ -18,10 +21,10 @@ function App() {
       const initResult = await service.current?.initialize({
         modulesConfig: {
           docreader: {
-            devLicense: 'Base64License',
-          }
+            devLicense: "",
+          },
         },
-        includedModules: [FaceIdv, DocumentIdv],
+        includedModules: [IproovIdv, DocumentIdv],
       });
       if (initResult?.error) {
         console.log(initResult.error);

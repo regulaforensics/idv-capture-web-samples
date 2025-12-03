@@ -49,7 +49,7 @@ function App() {
         return;
       }
       const prepareResult = await service.current?.prepareWorkflow({
-        workflowId: "", // set workflow id
+        workflowId: "edda0192-b890-11ef-a348-17da751a6a35", // set workflow id
       });
       if (prepareResult?.error) {
         console.log(prepareResult.error);

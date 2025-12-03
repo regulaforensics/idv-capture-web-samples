@@ -26,7 +26,7 @@ idv-capture-web-samples/
 
 ## 🚀 Running Examples
 
-### For modular frameworks (React, Angular, Webpack)
+### For frameworks (React, Angular, Webpack)
 
 1. Navigate into the folder of the required framework.
 2. Then go to the folder of the desired integration approach.

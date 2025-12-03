@@ -81,7 +81,7 @@ password: ""   // set password
 Additional setup:
 
 1. Set the `workflowId` in the `prepareWorkflow` method.
-2. **Important:**  
+2. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
    For the DocumentReader module to work correctly, specify your DocumentReader license in **Base64 format** in the `initialize` method.  
    Look for the placeholder:
 
@@ -120,7 +120,7 @@ Example:
 http://localhost:5173/?workflow=https://your-domain.com/mobile?authorization=Token xx-xxxxxxxxx_xxxxx_xxxxxxxx
 ```
 
-3. **Important:**  
+3. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
    Add your DocumentReader Base64 license in the `initialize` method (search for `Base64License`).
 
 ---
@@ -157,15 +157,18 @@ ttl: 86400,  // set ephemeral device time-to-live
 Additional setup:
 
 1. Set the `workflowId` inside the `prepareWorkflow` method.
-2. **Important:**  
+2. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
    Provide the DocumentReader license in Base64 format in the `initialize` method (search for `Base64License`).
 
 ---
 
-## ⚠️ Notes
+## ⚠️ Important Notes
+- To convert regula.license to base64 you can check this resource https://support.regulaforensics.com/hc/en-us/articles/15378060500881-How-to-convert-a-license-file-to-BASE64 
 
-- The DocumentReader module will not function without a valid **Base64 license**.
-- In every example, placeholders marked `Base64License` indicate where the license must be added.
+- Once the development is finished and your product is ready to be exposed to the internet, make sure that you have removed the license from your source code.
+
+- Use `Base64License` only when your product is under development or testing, and you still don't expose your application to the internet. Make sure that you have removed the `Base64License` before publishing the code in production.
+- In every example, placeholders marked `Base64License` indicate where the license must be added. (Only for development!)
 - Make sure to provide a correct `workflowId` for your environment.
 
 ---

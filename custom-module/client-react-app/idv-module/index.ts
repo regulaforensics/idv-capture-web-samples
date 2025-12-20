@@ -1,9 +1,9 @@
-import { IdvModuleProps, registerModule } from "@regulaforensics/idv-capture-web";
+import { type IdvModuleProps, registerModule } from "@regulaforensics/idv-interfaces";
 let isReady = false;
-export const MODULE_NAME = 'idv-document';
+export const MODULE_NAME = 'external-module';
 
 
-export class DocumentIdv extends HTMLElement {
+export class ExternalModule extends HTMLElement {
     props: any = null;
     private _mounted = false;
     constructor() {
@@ -30,11 +30,12 @@ export class DocumentIdv extends HTMLElement {
     render() {
         if (!this.shadowRoot) return;
         const style =
-            '<style> *,::after,::before{box-sizing:border-box}h1,h2,h3,h4,p,ul{padding:0;margin:0}li{list-style:none}:host{display:block;container-type:inline-size;container-name:host;width:100%;height:100%}</style>';
+            '<style> *,::after,::before{box-sizing:border-box}h1,h2,h3,h4,p,ul{padding:0;margin:0}li{list-style:none}:host{display:block;container-type:inline-size;container-name:host;width:100%;height:100%}.container{display: flex; justify-content: center; align-items: center; gap: 10px; flex-direction: column; background: #e8e8e8; height: 100%;}</style>';
         this.shadowRoot.innerHTML = style;
 		const element = document.createElement('div');
+        element.classList.add('container');
 		const button = document.createElement('button');
-		button.innerText = 'close';
+		button.innerText = this.props.moduleProps?.testButton?.text ?? 'Close';
 		button.addEventListener('click', () => {
 			this.props?.perform({
 				transactionId: '',
@@ -44,7 +45,7 @@ export class DocumentIdv extends HTMLElement {
 			});
 		})
 		
-		element.innerText = 'Test element';
+		element.innerText = this.props.moduleProps?.testText ?? 'Test';
 		element.appendChild(button);
         this.shadowRoot.appendChild(element);
     }
@@ -61,15 +62,17 @@ export class DocumentIdv extends HTMLElement {
     }
 
     static getSupportedTemplates = () => {
-        return ["DOC_READER"];
+        return ["EXT"];
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static initialize(modulesConfig: Record<string, unknown>) {
+        console.log('Initialize external module');
         isReady = true;
     }
 
     static deinitialize() {
+        console.log('Initialize external module');
         isReady = false;
     }
 
@@ -78,6 +81,6 @@ export class DocumentIdv extends HTMLElement {
     };
 }
 
-registerModule(MODULE_NAME, DocumentIdv);
+registerModule(MODULE_NAME, ExternalModule);
 
-export default DocumentIdv;
+export default ExternalModule;

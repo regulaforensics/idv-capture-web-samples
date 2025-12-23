@@ -3,7 +3,6 @@ import {
   IdvIntegrationService,
   IdvMessageEvent,
 } from "@regulaforensics/idv-capture-web";
-import { FaceIdv } from "@regulaforensics/idv-face";
 import { ExternalModule } from "./idv-module";
 
 function App() {
@@ -19,12 +18,8 @@ function App() {
     service.current.eventListener = listener;
     const serviceRun = async () => {
       const initResult = await service.current?.initialize({
-        modulesConfig: {
-          docreader: {
-            devLicense: "Base64License",
-          },
-        },
-        includedModules: [FaceIdv, ExternalModule],
+        modulesConfig: {},
+        includedModules: [ExternalModule],
       });
       if (initResult?.error) {
         console.log(initResult.error);

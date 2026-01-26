@@ -5,8 +5,6 @@ import { IdvIntegrationService } from "@regulaforensics/idv-capture-web";
 import { FaceIdv } from "@regulaforensics/idv-face";
 import { DocumentIdv } from "@regulaforensics/idv-document";
 
-
-
 const baseUrl = ""; // set host
 const apiKey = ""; // set api key (should be generated with "deeplink:write", "workflow:read" permissions)
 const workflowId = ""; // set workflow id

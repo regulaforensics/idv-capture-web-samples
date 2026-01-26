@@ -8,22 +8,12 @@ import { DocumentIdv } from "@regulaforensics/idv-document";
 
 function App() {
   const service = useRef<IdvIntegrationService | null>(null);
-  const searchParams = new URLSearchParams(window.location.search);
-  /** get token from the URL */
-  /** for example, we get the search parameter "workflow" */
-  /** This is one of the ways to transfer the token to the application page. */
-  /** You can also transfer the token to the app using props. */
-  const workflowToken = searchParams.get("workflow");
 
   const listener = (event: IdvMessageEvent) => {
     console.log(event);
   };
 
   useEffect(() => {
-    if (!workflowToken) {
-      console.log("The workflow token was not found");
-      return;
-    }
     service.current = new IdvIntegrationService();
     service.current.sessionRestoreMode = true;
     service.current.eventListener = listener;
@@ -40,8 +30,39 @@ function App() {
         console.log(initResult.error);
         return;
       }
+
+      const baseUrl = ""; // set host
+      const apiKey = ""; // set api key (should be generated with "deeplink:write", "workflow:read" permissions)
+      const workflowId = ""; // set workflow id
+      const ttl = 3600; // set time to live
+      const locale = "en";
+
+      // Get Handoff URL (URL with token and sessionId) by workflowId and apiKey.
+      // Normally this has to be done on the backend in order to keep the apiKey secret.
+      let handoffUrl = "";
+      try {
+        const response = await fetch(
+          `${baseUrl}/api/v1/deeplink?workflowId=${workflowId}`,
+          {
+            headers: {
+              authorization: `ApiKey ${apiKey}`,
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ ttl, locale, metadata: {} }),
+            method: "POST",
+          }
+        );
+        const responseJson = await response.json();
+        handoffUrl = responseJson.url;
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
+      // ==============================================================================
+
+      console.log("Handoff URL:", handoffUrl);
+
       const configureResult = await service.current?.configure({
-        url: workflowToken
+        url: handoffUrl,
       });
       console.log(configureResult);
       if (configureResult?.error) {
@@ -49,7 +70,7 @@ function App() {
         return;
       }
       const prepareResult = await service.current?.prepareWorkflow({
-        workflowId: "", // set workflow id
+        workflowId,
       });
       if (prepareResult?.error) {
         console.log(prepareResult.error);
@@ -58,7 +79,7 @@ function App() {
       const metadata = { test: true };
       const startWorkflowResult = await service.current?.startWorkflow({
         metadata: metadata,
-        locale: "en",
+        locale,
       });
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);

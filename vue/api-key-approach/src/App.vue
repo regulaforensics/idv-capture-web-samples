@@ -30,9 +30,9 @@ onMounted(() => {
     }
 
     const configureResult = await service.value?.configure({
-      baseUrl: '', // set host
-      userName: '', // set user name
-      password: '', // set password
+      baseUrl: "", // set host
+      apiKey: "", // set api key
+      ttl: 86400, // set time to live
     })
     console.log(configureResult)
     if (configureResult?.error) {

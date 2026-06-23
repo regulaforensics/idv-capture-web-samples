@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "serve": "vite",
+    "serve": "vite --port 6006",
     "build": "vite build"
   },
   "dependencies": {

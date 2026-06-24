@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 6006",
+    "serve": "ng serve --port 6006",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
-  "packageManager": "npm@11.12.1",
   "dependencies": {
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
@@ -17,7 +17,7 @@
     "@angular/forms": "^22.0.0",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
-    "@regulaforensics/idv-capture-web": "3.6.430-nightly",
+    "@regulaforensics/idv-capture-web": "latest",
     "@regulaforensics/idv-document": "latest",
     "@regulaforensics/idv-face": "latest",
     "rxjs": "~7.8.0",

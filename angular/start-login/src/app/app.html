@@ -1,0 +1,6 @@
+<div class="container">
+  <app-idv *ngIf="isOpen(); else openButton"></app-idv>
+  <ng-template #openButton>
+    <button (click)="startLogin()">Start Login</button>
+  </ng-template>
+</div>

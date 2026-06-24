@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!this.service) return;
     if (!this.isPreparedWithId) {
       const prepareResult = await this.service.prepareWorkflow({
-        workflowId: "", // set workflow id
+        workflowId: "7a65d551-941a-4f7a-88b8-fd028935249f", // set workflow id
       });
       console.log({ prepareResult });
       if (prepareResult.error) {
@@ -67,9 +67,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     const configureResult = await this.service.configure({
-      baseUrl: "", // set host
-      userName: "", // set user name
-      password: "", // set password
+      baseUrl: "https://nightly.idv-platform.app/", // set host
+      userName: "nightly-storybook", // set user name
+      password: "1#Aa_test",  // set password
     });
     console.log({ configureResult });
     if (configureResult?.error) {

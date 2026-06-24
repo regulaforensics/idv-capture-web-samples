@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "api-key-approach-2:build:production"
+              "buildTarget": "api-key-approach:build:production"
             },
             "development": {
-              "buildTarget": "api-key-approach-2:build:development"
+              "buildTarget": "api-key-approach:build:development"
             }
           },
           "defaultConfiguration": "development"

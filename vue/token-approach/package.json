@@ -1,5 +1,5 @@
 {
-  "name": "api-key-approach",
+  "name": "token-approach",
   "version": "0.0.0",
   "private": true,
   "type": "module",

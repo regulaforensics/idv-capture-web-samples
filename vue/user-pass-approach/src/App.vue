@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { IdvIntegrationService, type IdvMessageEvent } from '@regulaforensics/idv-capture-web'
 import { FaceIdv } from '@regulaforensics/idv-face'
 import { DocumentIdv } from '@regulaforensics/idv-document'
@@ -61,6 +61,10 @@ onMounted(() => {
   }
 
   serviceRun()
+})
+
+onUnmounted(() => {
+  service.value?.deinitialize()
 })
 </script>
 

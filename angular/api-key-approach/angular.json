@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "api-key-approach-2": {
+    "api-key-approach": {
       "projectType": "application",
       "schematics": {},
       "root": "",

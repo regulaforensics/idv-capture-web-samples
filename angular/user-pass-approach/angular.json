@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "user-pass-approach-2": {
+    "user-pass-approach": {
       "projectType": "application",
       "schematics": {},
       "root": "",

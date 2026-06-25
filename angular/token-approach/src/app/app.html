@@ -1,0 +1,9 @@
+<div class="container">
+  @if (isOpen() && isPreparedWithId()) {
+    <app-idv></app-idv>
+  } @else {
+    <button [disabled]="!isConnectedToPlatform()" (click)="startWorkflow()">
+      Start Session
+    </button>
+  }
+</div>

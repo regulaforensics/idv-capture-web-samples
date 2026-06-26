@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Start Login</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #wrapper {
+          display: flex;
+          height: 100%;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+      }
+
+      #idv-container {
+          display: none;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+          justify-content: center;
+          align-items: center;
+      }
+
+      button {
+          padding: 10px 30px;
+          color: white;
+          font-size: 16px;
+          border-radius: 2px;
+          background-color: #bd7dff;
+          border: 1px solid #bd7dff;
+          cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <button id="start-login-btn">Start Login</button>
+      <div id="idv-container">
+        <idv-flow></idv-flow>
+      </div>
+    </div>
+    <script src="https://unpkg.com/@regulaforensics/idv-capture-web@latest/dist/main.iife.js"></script>
+    <script src="https://unpkg.com/@regulaforensics/idv-face@latest/dist/main.iife.js"></script>
+    <script src="https://unpkg.com/@regulaforensics/idv-document@latest/dist/main.iife.js"></script>
+
+    <script>
+      const startLoginBtn = document.getElementById('start-login-btn');
+      const idvContainer = document.getElementById('idv-container');
+
+      function idvEventListener(data) {
+        console.log(data);
+      }
+
+      const idvSdk = window.RegulaIdv;
+      const { FaceIdv } = window.RegulaIdvFace;
+      const { DocumentIdv } = window.RegulaIdvDocument;
+      const { IdvIntegrationService } = idvSdk;
+
+      let service = null;
+
+      async function startLogin() {
+        const loginConfig = {
+          applicationId: "", // set application id
+          baseUrl: "" , // set base url
+          metadata: {
+              additionalProp1: {},
+          },
+          locale: 'en',
+        };
+
+        service = new IdvIntegrationService();
+        service.sessionRestoreMode = true;
+        service.eventListener = idvEventListener;
+
+        const initResult = await service.initialize({
+          modulesConfig: {
+            docreader: {
+              devLicense: "Base64License",
+            },
+          },
+          includedModules: [FaceIdv, DocumentIdv],
+        });
+        if (initResult.error) {
+          console.log(initResult.error);
+          return;
+        }
+
+        idvContainer.style.display = 'flex';
+
+        const startLoginResult = await service.startLogin(loginConfig);
+
+        console.log(startLoginResult);
+
+        idvContainer.style.display = 'none';
+     }
+
+      startLoginBtn.addEventListener('click', startLogin);
+    </script>
+  </body>
+</html>

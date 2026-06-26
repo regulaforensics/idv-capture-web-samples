@@ -10,6 +10,6 @@ export class IdvComponent implements AfterViewInit {
     @ViewChild('idv', { static: false }) idv?: ElementRef<IdvWebComponent>;
 
     ngAfterViewInit() {
-      if (!this.idv) return;
+        if (!this.idv) return;
     }
 }

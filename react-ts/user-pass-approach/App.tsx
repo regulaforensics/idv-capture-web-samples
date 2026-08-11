@@ -29,9 +29,9 @@ function App() {
       }
   
       const configureResult = await service.current?.configure({
-        baseUrl: "", // set host
-        userName: "", // set user name
-        password: "",  // set password
+        baseUrl: "https://nightly.idv-platform.app", // set host
+        userName: "nightly-storybook", // set user name
+        password: "1#Aa_test",  // set password
       });
       console.log(configureResult);
       if (configureResult?.error) {
@@ -39,7 +39,7 @@ function App() {
         return;
       }
       const prepareResult = await service.current?.prepareWorkflow({
-        workflowId: "", // set workflow id
+        workflowId: "edda0192-b890-11ef-a348-17da751a2345", // set workflow id
       });
       if (prepareResult?.error) {
         console.log(prepareResult.error);
@@ -48,7 +48,7 @@ function App() {
       const metadata = { test: true };
       const startWorkflowResult = await service.current?.startWorkflow({
         metadata: metadata,
-        locale: 'en'
+        locale: 'en',
       });
       if (startWorkflowResult?.error) {
         console.log(startWorkflowResult.error);

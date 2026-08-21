@@ -4,7 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "serve": "webpack serve --open",
+    "serve": "webpack serve --open --port 6006",
     "build": "webpack --config webpack.config.js"
   },
   "keywords": [],

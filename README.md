@@ -5,7 +5,7 @@ A collection of simple integration examples for **`idv-capture-web`**.
 This repository includes several approaches showing how to embed the `idv-capture-web` module into different environments and frameworks.
 
 - The **cdn** folder contains a plain HTML example.  
-- The **react-ts**, **angular**, and **webpack** folders contain examples of integrating `idv-capture-web` as a module into popular frameworks.
+- The **react-ts**, **angular**, **webpack**, and **vue** folders contain examples of integrating `idv-capture-web` as a module into popular frameworks.
 
 ---
 
@@ -18,6 +18,7 @@ idv-capture-web-samples/
 ├─ react-ts/          # React + TypeScript integration examples
 ├─ angular/           # Angular integration examples
 ├─ webpack/           # Webpack-based integration examples
+├─ vue/               # Vue + TypeScript integration examples
 │
 └─ ... approaches inside each framework (user-pass, token, api-key)
 ```
@@ -26,7 +27,7 @@ idv-capture-web-samples/
 
 ## 🚀 Running Examples
 
-### For frameworks (React, Angular, Webpack)
+### For frameworks (React, Angular, Webpack, Vue)
 
 1. Navigate into the folder of the required framework.
 2. Then go to the folder of the desired integration approach.
@@ -158,6 +159,38 @@ Additional setup:
 
 1. Set the `workflowId` inside the `prepareWorkflow` method.
 2. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
+   Provide the DocumentReader license in Base64 format in the `initialize` method (search for `Base64License`).
+
+---
+
+## 🔑 `start-login`
+
+This approach starts a login session with **`startLogin`**, using the platform **base URL** and **application ID**.
+
+### Steps
+
+If the folder contains a `package.json`:
+
+```
+npm install
+```
+
+Start the project:
+
+```
+npm run serve
+```
+
+Then fill in the login parameters (in `loginConfig` passed to `startLogin`):
+
+```ts
+applicationId: "", // set application id
+baseUrl: "",       // set base url
+```
+
+Additional setup:
+
+1. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
    Provide the DocumentReader license in Base64 format in the `initialize` method (search for `Base64License`).
 
 ---

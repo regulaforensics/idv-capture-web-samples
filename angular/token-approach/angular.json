@@ -1,9 +1,12 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
+    "cli": {
+      "packageManager": "npm"
+    },
     "newProjectRoot": "projects",
     "projects": {
-      "document-reader": {
+      "token-approach": {
         "projectType": "application",
         "schematics": {},
         "root": "",
@@ -11,24 +14,27 @@
         "prefix": "app",
         "architect": {
           "build": {
-            "builder": "@angular-devkit/build-angular:application",
+            "builder": "@angular/build:application",
             "options": {
-              "outputPath": "build",
-              "index": "src/index.html",
               "browser": "src/main.ts",
-              "polyfills": [
-                "zone.js"
-              ],
               "tsConfig": "tsconfig.app.json",
-              "scripts": []
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                }
+              ],
+              "styles": [
+                "src/styles.css"
+              ]
             },
             "configurations": {
               "production": {
                 "budgets": [
                   {
                     "type": "initial",
-                    "maximumWarning": "500kB",
-                    "maximumError": "1MB"
+                    "maximumWarning": "2.5MB",
+                    "maximumError": "3MB"
                   },
                   {
                     "type": "anyComponentStyle",
@@ -47,25 +53,21 @@
             "defaultConfiguration": "production"
           },
           "serve": {
-            "builder": "@angular-devkit/build-angular:dev-server",
+            "builder": "@angular/build:dev-server",
             "configurations": {
               "production": {
-                "buildTarget": "document-reader:build:production"
+                "buildTarget": "token-approach:build:production"
               },
               "development": {
-                "buildTarget": "document-reader:build:development"
+                "buildTarget": "token-approach:build:development"
               }
             },
             "defaultConfiguration": "development"
           },
-          "extract-i18n": {
-            "builder": "@angular-devkit/build-angular:extract-i18n"
+          "test": {
+            "builder": "@angular/build:unit-test"
           }
         }
       }
-    },
-    "cli": {
-      "analytics": false
     }
-  }
-  
+}

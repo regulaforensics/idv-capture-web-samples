@@ -165,7 +165,7 @@ Additional setup:
 
 ## 🔑 `start-login`
 
-This approach uses an **API Key** to connect to the platform.
+This approach starts a login session with **`startLogin`**, using the platform **base URL** and **application ID**.
 
 ### Steps
 
@@ -181,16 +181,16 @@ Start the project:
 npm run serve
 ```
 
-Then fill in the platform connection parameters:
+Then fill in the login parameters (in `loginConfig` passed to `startLogin`):
 
 ```ts
-baseUrl: "", // set base url
 applicationId: "", // set application id
+baseUrl: "",       // set base url
 ```
 
 Additional setup:
 
-1.**Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
+1. **Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
    Provide the DocumentReader license in Base64 format in the `initialize` method (search for `Base64License`).
 
 ---

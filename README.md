@@ -163,6 +163,38 @@ Additional setup:
 
 ---
 
+## 🔑 `start-login`
+
+This approach uses an **API Key** to connect to the platform.
+
+### Steps
+
+If the folder contains a `package.json`:
+
+```
+npm install
+```
+
+Start the project:
+
+```
+npm run serve
+```
+
+Then fill in the platform connection parameters:
+
+```ts
+baseUrl: "", // set base url
+applicationId: "", // set application id
+```
+
+Additional setup:
+
+1.**Important: ONLY DEVELOPER MODE. DON'T USE Base64License FOR PRODUCTION.**
+   Provide the DocumentReader license in Base64 format in the `initialize` method (search for `Base64License`).
+
+---
+
 ## ⚠️ Important Notes
 - To convert regula.license to base64 you can check this resource https://support.regulaforensics.com/hc/en-us/articles/15378060500881-How-to-convert-a-license-file-to-BASE64 
 
